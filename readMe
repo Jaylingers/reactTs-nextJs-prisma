@@ -1,0 +1,95 @@
+reference link:
+https://www.youtube.com/watch?v=GxUR4zIasB8
+https://vercel.com/guides/nextjs-prisma-postgres
+
+1.
+npx create-next-app@latest
+typescript:yes
+eslint:yes
+tailwind css:yes
+src:no
+app router:yes
+customize default:no
+
+
+2.
+git add .
+git remote add origin https://github.com/Jaylingers/react-nextjs-prisma.git
+git commit -m 'message'
+git push
+
+vercel.com/dashboard
+
+
+3.
+add docker-compose.yml
+"create image"
+services:
+  postgres:
+    image: postgres:12
+    environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_DB: user
+    ports:
+        - 5432:5432
+    volumes:
+        - data:/var/lib/postgresql/data
+volumes:
+    data:
+
+4.
+add database on datasource
+POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_DB: user
+
+5.
+create users table
+CREATE TABLE users (
+                       user_id SERIAL PRIMARY KEY,
+                       username VARCHAR(50) UNIQUE NOT NULL,
+                       email VARCHAR(100) UNIQUE NOT NULL,
+                       password VARCHAR(100) NOT NULL,
+                       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+6.
+https://vercel.com/signup //connect your github
+npm i -g vercel@latest
+vercel link
+
+setup: y
+link to existing project: y
+name of existing project: react-nextjs-prisma
+
+vercel env pull env.local
+rename .env.local to .env
+
+add text on .gitignore file
+.env
+
+
+7.
+npm install prisma --save-dev
+
+add schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+yarn prisma db pull
+
+
+
+
+
+
+
+
+
+
