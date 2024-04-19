@@ -56,6 +56,7 @@ CREATE TABLE users (
 
 6.
 https://vercel.com/signup //connect your github
+create db postgresSql on vercel
 npm i -g vercel@latest
 vercel link
 
@@ -83,4 +84,8 @@ datasource db {
   provider = "postgres"
   url      = env("DATABASE_URL")
 }
+
+prisma db push
+prisma db pull
+
 yarn prisma db pull
